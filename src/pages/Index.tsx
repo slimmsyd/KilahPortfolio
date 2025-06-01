@@ -11,7 +11,7 @@ const portfolioItems = [
     title: "TGI Intro",
     date: "2024 - Featured",
     description: "Dynamic introduction showcasing creative vision and brand identity through compelling visual storytelling",
-    videoUrl: "/TGINtro.mp4",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Brand Identity"
   },
   {
@@ -19,7 +19,7 @@ const portfolioItems = [
     title: "Raleigh Event",
     date: "2024 - Live Coverage",
     description: "Professional event documentation capturing the energy and atmosphere of live experiences",
-    videoUrl: "/Raleigh Event.mov",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Event Coverage"
   },
   {
@@ -27,7 +27,7 @@ const portfolioItems = [
     title: "Open Butterfly Jewelry",
     date: "2024 - Commercial",
     description: "Elegant jewelry showcase highlighting craftsmanship and beauty through artistic cinematography",
-    videoUrl: "/Open Butterfly Jewelry .mov",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Product Showcase"
   },
   {
@@ -35,7 +35,7 @@ const portfolioItems = [
     title: "Lucy Lu's Boutique",
     date: "2024 - Fashion",
     description: "Fashion boutique presentation featuring style, elegance, and contemporary retail experience",
-    videoUrl: "/Lucy Lu's Boutique.mov",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Fashion & Retail"
   },
   {
@@ -43,7 +43,7 @@ const portfolioItems = [
     title: "Juicy Vybz",
     date: "2024 - Lifestyle",
     description: "Vibrant lifestyle content capturing energy, culture, and authentic brand personality",
-    videoUrl: "/Juicy Vybz.mov",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Lifestyle Brand"
   },
   {
@@ -51,7 +51,7 @@ const portfolioItems = [
     title: "Calming Candles Aromatherapy",
     date: "2024 - Wellness",
     description: "Serene wellness brand showcase emphasizing relaxation, mindfulness, and therapeutic experiences",
-    videoUrl: "/Calming Candles Aromatherapy.mov",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Wellness & Lifestyle"
   },
   {
@@ -59,7 +59,7 @@ const portfolioItems = [
     title: "A Great Day Candle Company",
     date: "2024 - Artisan",
     description: "Artisan candle craftsmanship highlighting quality, ambiance, and handmade excellence",
-    videoUrl: "/A Great Day Candle Company.mov",
+    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder - replace with optimized version
     category: "Artisan Craft"
   }
 ];
