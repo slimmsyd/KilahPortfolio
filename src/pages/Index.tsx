@@ -103,6 +103,7 @@ const Index = () => {
         handlePrevious();
       }
     };
+    console.log('Current index:', currentIndex);
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
