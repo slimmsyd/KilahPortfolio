@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
-import openaiService from '../services/openaiService';
+// import openaiService from '../services/openaiService';
 
 interface PortfolioItem {
   id: number;
@@ -57,7 +57,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
   // Update welcome message when portfolio item changes
   useEffect(() => {
     if (messages.length > 0) {
-      const apiStatus = openaiService.isAvailable() ? '🤖 Real AI responses enabled' : '💡 Smart fallback responses (add API key for real AI)';
+      // const apiStatus = openaiService.isAvailable() ? '🤖 Real AI responses enabled' : '💡 Smart fallback responses (add API key for real AI)';
+      const apiStatus = '💡 Smart fallback responses (service temporarily disabled)';
       
       const newWelcomeMessage = {
         id: Date.now(),
@@ -88,12 +89,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
     setIsTyping(true);
 
     try {
-      // Get AI response using OpenAI service
-      const aiResponseText = await openaiService.getChatResponse(
-        currentInput,
-        currentItem,
-        conversationHistory
-      );
+      // Temporary fallback response while service is commented out
+      const aiResponseText = `Thanks for asking about "${currentItem.title}"! This is a temporary response while the AI service is disabled. The chatbot will provide intelligent responses about Kilah's creative work once the service is re-enabled.`;
       
       const aiResponse: Message = {
         id: Date.now() + 1,
@@ -164,9 +161,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
                 <h3 className="text-white font-semibold">Kilah's AI Assistant</h3>
                 <p className="text-white/80 text-xs flex items-center gap-1">
                   Creative Portfolio Guide
-                  {openaiService.isAvailable() && (
+                  {/* {openaiService.isAvailable() && (
                     <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                  )}
+                  )} */}
                 </p>
               </div>
             </div>
@@ -245,7 +242,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
               </button>
             </div>
             <div className="mt-2 text-xs text-gray-500 text-center">
-              {openaiService.isAvailable() ? 'Powered by OpenAI GPT-4' : 'Using smart fallback responses'}
+              {/* {openaiService.isAvailable() ? 'Powered by OpenAI GPT-4' : 'Using smart fallback responses'} */}
             </div>
           </div>
         </div>
