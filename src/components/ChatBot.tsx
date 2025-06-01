@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
-import { openaiService } from '../services/openaiService';
+import OpenAI from 'openai';
 
 interface PortfolioItem {
   id: number;
@@ -23,8 +23,96 @@ interface Message {
   timestamp: Date;
 }
 
+// Inline OpenAI service to avoid module resolution issues
+class OpenAIService {
+  private openai: OpenAI | null = null;
+  private isInitialized = false;
+
+  constructor() {
+    this.initializeOpenAI();
+  }
+
+  private initializeOpenAI() {
+    const apiKey = (import.meta as any).env?.VITE_OPENAI_API_KEY;
+    
+    if (!apiKey) {
+      console.warn('⚠️ OpenAI API key not found. Using fallback responses.');
+      return;
+    }
+
+    try {
+      this.openai = new OpenAI({
+        apiKey,
+        dangerouslyAllowBrowser: true
+      });
+      this.isInitialized = true;
+      console.log('🚀 OpenAI API initialized successfully!');
+    } catch (error) {
+      console.error('❌ Failed to initialize OpenAI:', error);
+    }
+  }
+
+  async getChatResponse(
+    userMessage: string,
+    currentItem: PortfolioItem,
+    conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }> = []
+  ): Promise<string> {
+    if (!this.isInitialized || !this.openai) {
+      return this.getFallbackResponse(userMessage, currentItem);
+    }
+
+    try {
+      const systemPrompt = `You are Kilah Oliver's AI assistant. Current project: "${currentItem.title}" - ${currentItem.category}. ${currentItem.description}. Contact: LinkedIn - https://www.linkedin.com/in/kilah-oliver-b4023a249/. Keep responses concise (2-3 sentences).`;
+
+      const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
+        { role: 'system', content: systemPrompt },
+        ...conversationHistory.map(msg => ({ role: msg.role, content: msg.content })),
+        { role: 'user', content: userMessage }
+      ];
+
+      const completion = await this.openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages,
+        max_tokens: 200,
+        temperature: 0.7,
+      });
+
+      return completion.choices[0]?.message?.content || this.getFallbackResponse(userMessage, currentItem);
+      
+    } catch (error) {
+      console.error('❌ OpenAI API error:', error);
+      return this.getFallbackResponse(userMessage, currentItem);
+    }
+  }
+
+  private getFallbackResponse(userMessage: string, currentItem: PortfolioItem): string {
+    const message = userMessage.toLowerCase();
+    
+    if (message.includes('contact') || message.includes('hire')) {
+      return "Interested in working with Kilah? You can reach out to her on LinkedIn: <a href='https://www.linkedin.com/in/kilah-oliver-b4023a249/' target='_blank' rel='noopener noreferrer' class='text-purple-400 hover:text-purple-300 underline'>Kilah Oliver - LinkedIn</a>";
+    }
+    
+    if (message.includes('this project') || message.includes(currentItem.title.toLowerCase())) {
+      return `"${currentItem.title}" is a ${currentItem.category} project that demonstrates Kilah's expertise in ${currentItem.category.toLowerCase()} and visual storytelling.`;
+    }
+    
+    const defaultResponses = [
+      "That's a great question about Kilah's work! Her portfolio demonstrates incredible range across different industries.",
+      "Kilah's creative process combines technical skill with authentic storytelling. What specific aspect interests you most?",
+      "I love discussing Kilah's projects! Each one showcases her talent for making brands feel authentic and engaging."
+    ];
+    
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+  }
+
+  isAvailable(): boolean {
+    return this.isInitialized && this.openai !== null;
+  }
+}
+
 const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openaiService] = useState(() => new OpenAIService());
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
