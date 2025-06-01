@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import VideoPlayer from '../components/VideoPlayer';
 import NavigationControls from '../components/NavigationControls';
 import ProjectInfo from '../components/ProjectInfo';
+import ChatBot from '../components/ChatBot';
 
 // Kilah Oliver's Creative Portfolio Data
 const portfolioItems = [
@@ -132,7 +133,14 @@ const Index = () => {
             <button className="text-white/80 hover:text-white transition-all duration-300 hover:scale-105 font-medium">
               View Gallery
             </button>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110"></div>
+            <div className="relative">
+              <img 
+                src="/Photo.jpeg" 
+                alt="Kilah Oliver Profile" 
+                className="w-12 h-12 rounded-full object-cover border-2 border-purple-400/50 shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-110 hover:border-purple-400"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 hover:opacity-75 transition-opacity duration-300"></div>
+            </div>
           </div>
         </div>
 
@@ -186,6 +194,9 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      {/* AI ChatBot */}
+      <ChatBot currentItem={currentItem} />
     </div>
   );
 };
