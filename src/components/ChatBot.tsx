@@ -8,6 +8,7 @@ interface PortfolioItem {
   date: string;
   description: string;
   videoUrl: string;
+  
   category: string;
 }
 

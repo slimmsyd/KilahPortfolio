@@ -78,6 +78,8 @@ const Index = () => {
     }
   };
 
+  console.log('Current index:', currentIndex);
+
   const handlePrevious = () => {
     console.log('Previous button clicked, current index:', currentIndex);
     setDirection(-1);
