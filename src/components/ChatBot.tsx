@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
-import { openaiService } from '../services/openaiService';
+import { openaiService } from '../services/openaiService.ts';
 
 interface PortfolioItem {
   id: number;
