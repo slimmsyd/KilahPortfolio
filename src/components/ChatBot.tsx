@@ -34,6 +34,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
     }
   ]);
   const [inputText, setInputText] = useState('');
+  console.log('Current item:', currentItem);
   const [isTyping, setIsTyping] = useState(false);
   const [conversationHistory, setConversationHistory] = useState<Array<{role: 'user' | 'assistant', content: string}>>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
