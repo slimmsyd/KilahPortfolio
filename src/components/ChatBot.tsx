@@ -190,7 +190,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ currentItem }) => {
                       : 'bg-gray-800 text-gray-100 border border-gray-700'
                   }`}
                 >
-                  <p className="text-sm leading-relaxed">{message.text}</p>
+                  {message.text.includes('<a href') ? (
+                    <div 
+                      className="text-sm leading-relaxed [&>a]:text-purple-400 [&>a]:hover:text-purple-300 [&>a]:underline [&>a]:transition-colors [&>a]:duration-200"
+                      dangerouslySetInnerHTML={{ __html: message.text }}
+                    />
+                  ) : (
+                    <p className="text-sm leading-relaxed">{message.text}</p>
+                  )}
                   <p className={`text-xs mt-1 ${message.isUser ? 'text-purple-100' : 'text-gray-400'}`}>
                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
